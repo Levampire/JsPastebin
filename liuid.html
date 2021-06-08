@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css"integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
+		<script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.6.0/jquery.js"></script>
+	</head>
+	<style>
+		.chooseBar-back{
+
+			display: flex;
+			flex-direction: row;
+			position: relative;
+			height: 40px ;
+			border-radius: 10px;
+			background-color: #ECF9F3;
+		}
+		.backSquare{
+			margin: 1px;
+			position: absolute;
+			left: 0;
+			z-index: 0;
+			height: 38px;
+			width: 90px;
+			background-color: #00DDA3;
+			border-radius: 10px;
+			transition: 0.5s cubic-bezier(0.1,0.4,0.6,1);
+		}
+		.backSquare-OFF{
+			left: 80px;
+			transition: 0.5s cubic-bezier(0.1,0.4,0.6,1);
+		}
+		.ON {
+
+			transition: 0.5s cubic-bezier(0.1,0.4,0.6,1);
+		}
+		.OFF {
+
+			transition: 0.5s cubic-bezier(0.1,0.4,0.6,1);
+		}
+
+		.choose-btn{
+			letter-spacing: 1px;
+			font-size: 14px;
+			font-weight: bold;
+			z-index: 1;
+			height: 40px;
+			text-align: center;
+			width: 90px;
+			line-height:40px ;
+			cursor: default;
+			color: white;
+		}
+	</style>
+	<body>
+		<div class=" chooseBar-back" >
+		  <div class="backSquare">
+		  </div>
+			<div class="choose-btn ON">
+				ON
+			</div>
+			<div class="choose-btn OFF">
+				OFF
+			</div>
+		</div>
+	</body>
+<script>
+	var switch_choose = 0 ;//载入配置开启状态
+
+	var switch_ON=function(){
+		console.log('on')
+		$(".ON").css("color", "white");
+		$(".OFF").css("color", "#22CCA0");
+		$(".backSquare").css("left", "0px");
+	}
+	var switch_OFF=function(){
+		console.log('off')
+		$(".OFF").css("color","white");
+		$(".ON").css("color","#22CCA0");
+		$(".backSquare").css("left","90px");
+	}
+	if(switch_choose === 1){
+		switch_ON();
+	}
+	else{
+		switch_OFF();
+	}
+
+
+	$($(".ON").click(function () {
+		switch_ON();
+	}))
+	$($(".OFF").click(function () {
+		switch_OFF();
+	}))
+
+
+</script>
+</html>

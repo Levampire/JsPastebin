@@ -1,0 +1,46 @@
+<?php
+namespace app\model;
+use core\base\model;
+
+class user extends model{
+    public function __construct(){
+        $this->table = DB_PREFIX . 'user';
+        $sql = str_replace('%table_name%', $this->table, file_get_contents('protected/sql/user/init.sql'));
+        $stmt = $this->connect()->prepare($sql);
+        $stmt->execute();
+    }
+
+    public function add($username, $email, $token){
+        $sql = "INSERT INTO " . $this->table . " (username, email, token) VALUES (?, ?, ?);";
+        $stmt = $this->connect()->prepare($sql);
+        $stmt->execute([$username, $email, $token]);
+    }
+
+    public function delete($search_param, $search_value){
+        $sql = "DELETE FROM " . $this->table . " WHERE " . $search_param . " = ?;";
+        $stmt = $this->connect()->prepare($sql);
+        $stmt->execute([$search_value]);
+    }
+
+    public function set($search_param, $search_value, $set_param, $set_value){
+        $sql = "UPDATE " . $this->table . " SET " . $set_param . " = ?" . " WHERE " . $search_param . " = ?";
+        $stmt = $this->connect()->prepare($sql);
+        $stmt->execute([$set_value, $search_value]);
+    }
+
+    public function get_all(){
+        $sql = "SELECT * FROM " . $this->table;
+        $stmt = $this->connect()->prepare($sql);
+        $stmt->execute();
+        return $stmt->fetchAll();
+    }
+
+    public function get($search_param, $search_value){
+        $sql = "SELECT * FROM " . $this->table . " WHERE " . $search_param . " = ?;";
+        $stmt = $this->connect()->prepare($sql);
+        $stmt->execute([$search_value]);
+        $result = $stmt->fetchAll();
+        return isset($result[0]) ? $result[0] : null;
+        // return $stmt->fetchAll()[0];
+    }
+}

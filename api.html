@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>JSPastebinAPI文档</title>
+</head>
+<body>
+
+<h1>JSPastebinAPI文档</h1>
+<div>[TOC]</div>
+<p>&nbsp;</p>
+<h2>1.  软件安装</h2>
+<p>按照MySQL-&gt;URL-&gt;SMTP的顺序设置</p>
+<p>接口位置：<code>/install</code></p>
+<p>页面位置：<code>/install</code></p>
+<p>使用POST传参</p>
+<h3>1.1 MySQL</h3>
+<h4>1.1.1 传入</h4>
+<figure><table>
+    <thead>
+    <tr><th>名称</th><th>值</th><th>必填</th><th>默认值</th></tr></thead>
+    <tbody><tr><td>module</td><td>mysql</td><td>是</td><td>&nbsp;</td></tr><tr><td>dbname</td><td>数据库名</td><td>是</td><td>&nbsp;</td></tr><tr><td>username</td><td>用户名</td><td>是</td><td>&nbsp;</td></tr><tr><td>pwd</td><td>密码</td><td>是</td><td>&nbsp;</td></tr><tr><td>host</td><td>主机</td><td>否</td><td>localhost</td></tr><tr><td>port</td><td>端口</td><td>否</td><td>3306</td></tr><tr><td>charset</td><td>编码</td><td>否</td><td>utf8</td></tr><tr><td>prefix</td><td>表头</td><td>否</td><td>fp_</td></tr></tbody>
+</table></figure>
+<h4>1.1.2 输出</h4>
+<p>成功返回200状态码，失败返回其他状态码。</p>
+<h3>1.2 URL</h3>
+<h4>1.2.1 传入</h4>
+<figure><table>
+    <thead>
+    <tr><th>名称</th><th>值</th><th>必填</th><th>默认值</th></tr></thead>
+    <tbody><tr><td>module</td><td>是</td><td>&nbsp;</td><td>&nbsp;</td></tr><tr><td>url</td><td>是</td><td>&nbsp;</td><td>&nbsp;</td></tr></tbody>
+</table></figure>
+<h4>1.2.2 输出</h4>
+<p>成功返回200状态码，失败返回其他状态码。</p>
+<h3>1.3 SMTP设置与验证码发送</h3>
+<h4>1.3.1 传入</h4>
+<figure><table>
+    <thead>
+    <tr><th>名称</th><th>值</th><th>必填</th><th>默认值</th></tr></thead>
+    <tbody><tr><td>module</td><td>smtp_verification</td><td>是</td><td>&nbsp;</td></tr><tr><td>host</td><td>服务器</td><td>是</td><td>&nbsp;</td></tr><tr><td>username</td><td>用户名</td><td>是</td><td>&nbsp;</td></tr><tr><td>pwd</td><td>密码</td><td>是</td><td>&nbsp;</td></tr><tr><td>sender</td><td>发件人</td><td>是</td><td>&nbsp;</td></tr><tr><td>admin</td><td>管理员邮箱</td><td>是</td><td>&nbsp;</td></tr><tr><td>port</td><td>端口</td><td>否</td><td>465</td></tr><tr><td>secure</td><td>表头</td><td>否</td><td>ssl</td></tr></tbody>
+</table></figure>
+<h4>1.3.1 输出</h4>
+<p>成功返回200状态码，验证码发送到管理员邮箱，失败返回其他状态码。</p>
+<h3>1.4 验证码提交</h3>
+<p>验证码有效期5分钟</p>
+<h4>1.4.1 传入</h4>
+<figure><table>
+    <thead>
+    <tr><th>名称</th><th>值</th><th>必填</th><th>默认值</th></tr></thead>
+    <tbody><tr><td>module</td><td>smtp_confirm</td><td>是</td><td>&nbsp;</td></tr><tr><td>verifivation_code</td><td>邮箱验证码</td><td>是</td><td>&nbsp;</td></tr></tbody>
+</table></figure>
+<h4>1.4.2 输出</h4>
+<p>成功返回200状态码并保存配置，验证码错误返回其他状态码。</p>
+<p>&nbsp;</p>
+<h2>2 全局设置</h2>
+<p>进管理员才能进行全局设置</p>
+<h3>2.1 获取设置</h3>
+<p><code>GET api/global</code> </p>
+<h4>2.1.1 传入</h4>
+<p>无</p>
+<h4>2.1.2 输出</h4>
+<p>见附件1，与附件1相同（不成功不会返回200）</p>
+<h3>2.2 提交设置</h3>
+<p><code>POST api/global</code> </p>
+<h4>2.2.1 传入</h4>
+<p>字段名见附件一注释，传啥改啥。</p>
+<h4>2.2.2 输出</h4>
+<p>成功返回200，失败返回其他。</p>
+<p>&nbsp;</p>
+<h2>3 用户</h2>
+<h3>3.1 设置管理员</h3>
+<p><code>GET api/user/admin</code></p>
+<p>完成install后请求本接口，系统会将登陆令牌发送至管理员邮箱。</p>
+<h4>3.1.1 传入</h4>
+<p>无</p>
+<h4>3.1.2 传出</h4>
+<p>成功返回200，失败返回其他。</p>
+<h3>3.2 登出</h3>
+<p>直接作为链接给用户点击，无任何参数，地址<code>user/logout</code>。</p>
+<h3>3.3 添加用户</h3>
+<p><code>POST api/user</code></p>
+<p>仅管理员才能添加用户</p>
+<h4>3.3.1 传入</h4>
+<figure><table>
+    <thead>
+    <tr><th>名称</th><th>值</th><th>必填</th><th>默认值</th></tr></thead>
+    <tbody><tr><td>username</td><td>用户名</td><td>是</td><td>&nbsp;</td></tr><tr><td>email</td><td>邮箱</td><td>是</td><td>&nbsp;</td></tr></tbody>
+</table></figure>
+<h4>3.3.2 传出</h4>
+<p>成功返回200，用户名或邮箱存在返回400。若请求成功，令牌链接将发送至新用户邮箱</p>
+<h3>3.4 删除用户</h3>
+<p><code>DELETE api/user</code></p>
+<p>仅管理员才能删除用户</p>
+<h4>3.4.1 传入</h4>
+<figure><table>
+    <thead>
+    <tr><th>名称</th><th>值</th><th>必填</th><th>默认值</th></tr></thead>
+    <tbody><tr><td>username</td><td>用户id</td><td>是</td><td>&nbsp;</td></tr></tbody>
+</table></figure>
+<h4>3.4.2 传出</h4>
+<p>成功返回200，失败返回其他。</p>
+<h3>3.5 修改用户信息</h3>
+<p><code>PUT api/user</code></p>
+<h4>3.5.1 传入</h4>
+<figure><table>
+    <thead>
+    <tr><th>名称</th><th>值</th><th>必填</th><th>默认值</th></tr></thead>
+    <tbody><tr><td>id</td><td>是</td><td>否（见下文）</td><td>&nbsp;</td></tr><tr><td>username</td><td>用户名</td><td>否</td><td>&nbsp;</td></tr><tr><td>email</td><td>email</td><td>否</td><td>&nbsp;</td></tr><tr><td>token</td><td>令牌</td><td>否</td><td>&nbsp;</td></tr></tbody>
+</table></figure>
+<h4>3.5.2 传出</h4>
+<p>成功返回200，用户名/邮箱重复返回400，其他错误返回其他值。非管理员只能改自己的，就算传了id也无视。管理员传了id就改id的，不传就改自己的。username和email和令牌传啥改啥，都传都改。只要改了email或token，会重置令牌，令牌链接会发到修改后的邮箱。</p>
+<h3>3.6 获取用户信息</h3>
+<p><code>GET api/user</code></p>
+<h4>3.6.1 传入</h4>
+<figure><table>
+    <thead>
+    <tr><th>名称</th><th>值</th><th>必填</th><th>默认值</th></tr></thead>
+    <tbody><tr><td>option</td><td>是</td><td>否（见下文）</td><td>&nbsp;</td></tr></tbody>
+</table></figure>
+<h4>3.6.2 传出</h4>
+<p>对于管理员用户且option未设置或不为self，传出json形如：</p>
+<pre><code class='language-json' lang='json'>[
+    {
+        &quot;id&quot;: &quot;1&quot;,
+        &quot;username&quot;: &quot;vanfantasy&quot;,
+        &quot;email&quot;: &quot;952070942@qq.com&quot;,
+        &quot;token&quot;: &quot;r3jMY4aLw9TihTMr4K9tfKKuugmI4HVW&quot;
+    },
+    {
+        &quot;id&quot;: &quot;4&quot;,
+        &quot;username&quot;: &quot;van_fantasy&quot;,
+        &quot;email&quot;: &quot;liyu@tigerxly.com&quot;,
+        &quot;token&quot;: &quot;b6lhot473qBuf7f1CB6597ZNYK1dd94L&quot;
+    }
+]
+</code></pre>
+<p>对于非管理员用户或管理员用户且option为self，传出json形如：</p>
+<pre><code class='language-json' lang='json'>{
+    &quot;id&quot;: &quot;1&quot;,
+    &quot;username&quot;: &quot;vanfantasy&quot;,
+    &quot;email&quot;: &quot;952070942@qq.com&quot;,
+    &quot;token&quot;: &quot;r3jMY4aLw9TihTMr4K9tfKKuugmI4HVW&quot;,
+    &quot;token_link&quot;: &quot;https://jspastebin.sunxiaochuan258.com/login?token=r3jMY4aLw9TihTMr4K9tfKKuugmI4HVW&quot;
+}
+</code></pre>
+<p>成功返回200，失败返回其他。</p>
+<p>&nbsp;</p>
+<h2>4 主功能</h2>
+<h3>4.1 添加资源</h3>
+<p><code>POST api/resources</code></p>
+<h4>4.1.1 传入</h4>
+<figure><table>
+    <thead>
+    <tr><th>名称</th><th>值</th><th>必填</th><th>备注</th></tr></thead>
+    <tbody><tr><td>filename</td><td>文件名</td><td>是</td><td>包含后缀</td></tr><tr><td>username</td><td>用户名</td><td>是</td><td>&nbsp;</td></tr><tr><td>ext</td><td>拓展名</td><td>是</td><td>js或css</td></tr><tr><td>其他</td><td>配置</td><td>否</td><td>&nbsp;</td></tr></tbody>
+</table></figure>
+<h4>4.1.2 传出</h4>
+<p>形如：</p>
+<pre><code class='language-json' lang='json'>{
+    &quot;link&quot;: &quot;https://jspastebin.sunxiaochuan258.com/resources/css/hello.css&quot;,
+    &quot;status&quot;: &quot;success&quot;
+}
+</code></pre>
+<h3>4.2 获取资源列表</h3>
+<p><code>GET api/resources</code></p>
+<p>仅管理员才能获取资源列表</p>
+<h4>4.2.1 传入</h4>
+<p>无</p>
+<h4>4.2.2 传出</h4>
+<p>形如：</p>
+<pre><code class='language-json' lang='json'>[
+    {
+        &quot;id&quot;: &quot;1&quot;,
+        &quot;filename&quot;: &quot;a.js&quot;,
+        &quot;ext&quot;: &quot;js&quot;,
+        &quot;content&quot;: &quot;console.log(\&quot;hello\&quot;);&quot;,
+        &quot;uploader&quot;: &quot;1&quot;,
+        &quot;config&quot;: &quot;null&quot;,
+        &quot;timestamp&quot;: &quot;1616573623&quot;
+    },
+    {
+        &quot;id&quot;: &quot;2&quot;,
+        &quot;filename&quot;: &quot;hello.css&quot;,
+        &quot;ext&quot;: &quot;css&quot;,
+        &quot;content&quot;: &quot;body{background-color: red;}&quot;,
+        &quot;uploader&quot;: &quot;1&quot;,
+        &quot;config&quot;: &quot;null&quot;,
+        &quot;timestamp&quot;: &quot;1616591735&quot;
+    }
+]
+</code></pre>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<h2>附件</h2>
+<p><strong>附件1 全局配置</strong></p>
+<pre><code class='language-json' lang='json'>{
+    cdn_mode:0, //是都开启CDN，如果开CDN，后面所有配置无效  cdn_mode
+    rate_limit: //限流
+    {
+        mode:0 //是否开启限流  rate_limit_mode
+        time_span:5 //每隔多少秒  rate_limit_time_span
+        limit:30 //每个ip能请求多少次  rate_limit_limit
+    }
+    ip_list: //ip黑白名单
+    {
+        mode:&quot;none&quot; //模式，none不使用，whitelist白名单，blacklist黑名单  ip_list_mode
+        whitelist:[] //白名单  ip_list_whitelist
+        blacklist:[] //黑名单  ip_list_blacklist
+    }
+    anti_leech: //防盗链
+	{
+        mode:&quot;none&quot; //模式，none不使用，whitelist白名单，blacklist黑名单  anti_leech_mode
+        whitelist:[] //白名单  anti_leech_whitelist
+        blacklist:[] //黑名单  anti_leech_blacklist
+    }
+    cache: //缓存
+	{
+        mode:&quot;config&quot; //模式，config按配置来，custom自定义  cache_mode
+        max_age:43200 //缓存生命周期为  cache_max_age
+        custom:&quot;&quot; //cache-control字段  cache_max_custom
+    }
+}
+</code></pre>
+<p><strong>附件2  配置验证后端代码</strong></p>
+<pre><code class='language-php' lang='php'>$config = config::getGlobal();
+$config[&#39;cdn_mode&#39;] = isset($_POST[&#39;cdn_mode&#39;]) ? $_POST[&#39;cdn_mode&#39;] : $config[&#39;cdn_mode&#39;];
+if($config[&#39;cdn_mode&#39;]){
+    config::setGlobal($config);
+    $this-&gt;success();
+    break;
+}
+$config[&#39;rate_limit&#39;][&#39;mode&#39;] = isset($_POST[&#39;rate_limit_mode&#39;]) ? $_POST[&#39;rate_limit_mode&#39;] : $config[&#39;rate_limit&#39;][&#39;mode&#39;];
+if($config[&#39;rate_limit&#39;][&#39;mode&#39;]){
+    $config[&#39;rate_limit&#39;][&#39;time_span&#39;] = isset($_POST[&#39;rate_limit_time_span&#39;]) ? $_POST[&#39;rate_limit_time_span&#39;] : $config[&#39;rate_limit&#39;][&#39;time_span&#39;];
+    $config[&#39;rate_limit&#39;][&#39;limit&#39;] = isset($_POST[&#39;rate_limit_limit&#39;]) ? $_POST[&#39;rate_limit_limit&#39;] : $config[&#39;rate_limit&#39;][&#39;limit&#39;];
+}
+$config[&#39;ip_list&#39;][&#39;mode&#39;] = isset($_POST[&#39;ip_list_mode&#39;]) ? $_POST[&#39;ip_list_mode&#39;] : $config[&#39;ip_list&#39;][&#39;mode&#39;];
+if($config[&#39;ip_list&#39;][&#39;mode&#39;] == &#39;blacklist&#39; &amp;&amp; isset($_POST[&#39;ip_list_blacklist&#39;])){
+    $ip_arr = explode(&quot;\r\n&quot;, trim($_POST[&#39;ip_list_blacklist&#39;]));
+    for($i = 0; $i &lt; count($ip_arr); ++$i){
+        if(!filter_var($ip_arr[$i], FILTER_VALIDATE_IP)){
+            $this-&gt;bad_request();
+        }
+    }
+    $config[&#39;ip_list&#39;][&#39;blacklist&#39;] = $ip_arr;
+}
+elseif($config[&#39;ip_list&#39;][&#39;mode&#39;] == &#39;whitelist&#39; &amp;&amp; isset($_POST[&#39;ip_list_whitelist&#39;])){
+    $ip_arr = explode(&quot;\r\n&quot;, trim($_POST[&#39;ip_list_whitelist&#39;]));
+    for($i = 0; $i &lt; count($ip_arr); ++$i){
+        if(!filter_var($ip_arr[$i], FILTER_VALIDATE_IP)){
+            $this-&gt;bad_request();
+        }
+    }
+    $config[&#39;ip_list&#39;][&#39;whitelist&#39;] = $ip_arr;
+}
+$config[&#39;anti_leech&#39;][&#39;mode&#39;] = isset($_POST[&#39;anti_leech_mode&#39;]) ? $_POST[&#39;anti_leech_mode&#39;] : $config[&#39;anti_leech&#39;][&#39;mode&#39;];
+if($config[&#39;anti_leech&#39;][&#39;mode&#39;] == &#39;blacklist&#39; &amp;&amp; isset($_POST[&#39;anti_leech_blacklist&#39;])){
+    $ip_arr = explode(&quot;\r\n&quot;, trim($_POST[&#39;anti_leech_blacklist&#39;]));
+    $config[&#39;anti_leech&#39;][&#39;blacklist&#39;] = $ip_arr;
+}
+elseif($config[&#39;anti_leech&#39;][&#39;mode&#39;] == &#39;whitelist&#39; &amp;&amp; isset($_POST[&#39;anti_leech_whitelist&#39;])){
+    $ip_arr = explode(&quot;\r\n&quot;, trim($_POST[&#39;anti_leech_whitelist&#39;]));
+    $config[&#39;anti_leech&#39;][&#39;whitelist&#39;] = $ip_arr;
+}
+$config[&#39;cache&#39;][&#39;mode&#39;] = isset($_POST[&#39;cache_mode&#39;]) ? $_POST[&#39;cache_mode&#39;] : $config[&#39;cache&#39;][&#39;mode&#39;];
+if($config[&#39;cache&#39;][&#39;mode&#39;] == &#39;config&#39;){
+    $config[&#39;cache&#39;][&#39;max_age&#39;] = isset($_POST[&#39;cache_max_age&#39;]) ? $_POST[&#39;cache_max_age&#39;] : $config[&#39;cache&#39;][&#39;max_age&#39;];
+}
+elseif($config[&#39;cache&#39;][&#39;mode&#39;] == &#39;custom&#39;){
+    $config[&#39;cache&#39;][&#39;custom&#39;] = isset($_POST[&#39;cache_custom&#39;]) ? $_POST[&#39;cache_custom&#39;] : $config[&#39;cache&#39;][&#39;custom&#39;];
+}
+config::setGlobal($config);
+$this-&gt;success();
+</code></pre>
+<p>&nbsp;</p>
+
+
+</body>
+</html>

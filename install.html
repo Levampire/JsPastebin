@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8" />
+	<title>开始配置JSPastebin</title>
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css"integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
+	 <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.6.0/jquery.js"></script>
+	<link rel="stylesheet" href="css/install.css">
+	<script src="js/clipboard.js"></script>
+</head>
+<body >
+<div class="board">
+		<div class="leftCard">
+			  <img id="yellowBall" src="img/yellow-mini.png" height="48" width="48"/>
+			  <img id="greenBall" src="img/green-big.png" height="258" width="259"/>
+			  <div class="glassCard">
+				  <div class="leftTopBrand">
+					  <p >THE</p>
+					  <p >JSPASTEBIN</p>
+				  </div>
+				  <div class="line" style="width: 40px;height: 5px;background-color:rgba(0,0,0,0.2);"></div>
+				  <div class="presentWord" style="">
+					  <h1 style="position:relative; font-size:18px ; top:-80px;font-weight: 200">
+						  JSPastebin
+						  面向使用各类CMS的您
+					  </h1><br>
+					  <a>方便、美观的</a>
+					  <a>更新您的的CSS、JS代码 </a>
+					   <a>一键粘贴、极速推送、安全实用</a>
+						<a style="position: relative;top:70px;left:calc(50% - 50px)">
+						  安装使用>>>></a>
+				  </div>
+			  </div>
+			  <img id="greenBallMini"  src="img/green-mini.png" height="231" width="231"/></div>
+		  <div class="guideCard">
+			  <div class="title ">
+				  JSPastebin
+			  </div><br>
+			  <div class="frame ">
+				  Powered By FantasyPHP
+			  </div><br>
+<!--切换小页面-->
+			  <div class="scroll">
+				  <li class="page checkCard">
+					  <a >一步操作即可将JS部署至您的云端</a>
+					  <div  class="button" >
+						  <div class="placeholder" style="font-size: 12pt;color:rgba(255,255,255, 0.8); " >Confirm</div>
+						  <h1 style="font-size: 15pt;font-weight: bold"  >一触即达</h1>
+						  <div class="slipper" style="font-family: 'Microsoft YaHei UI';font-weight: bold">
+							  >>
+						  </div>
+					  </div>
+				  </li>
+ <!-- 数据库配置 -->
+				  <li class="page">
+					  <div class="MySQLPage">
+						  <form id="MySQLForm"  method="post" enctype="multipart/form-data" >
+						  	<div class="innerPage-title">
+						  		填写您的数据库配置
+						  	</div>
+
+						  	  <div class="form-group">
+						  	    <input type="text" class="form-control sqlInput dbname" placeholder="*" name="dbname" >
+						  		<label class="label label1" >数据库名</label>
+						  	  </div>
+						  	<div class="combainTwo">
+						  		<div class="form-group userIndex" >
+						  			<input type="text" class="form-control sqlInput username" placeholder="*" name="username">
+						  			<label class="label label2">用户名</label>
+						  		</div>
+						  		<div class="form-group">
+						  			<input type="password" class="form-control sqlInput sqlform" placeholder="*" name="pwd">
+						  			<label class="label label2">密码</label>
+						  		</div>
+						  	</div>
+						  	<div class="combainTwo">
+						  		<div class="form-group userIndex" >
+									<input type="text" class="form-control sqlInput localhost" placeholder="默认localhost" name="localhost" value="loaclhost">
+						  			<label class="label label2">主机</label>
+						  		</div>
+						  		<div class="form-group">
+						  			<input type="text" class="form-control sqlInput port" placeholder="默认值3306" name="port" value="3306">
+						  			<label class="label label2">端口</label>
+						  		</div>
+						  	</div>
+						  	<div class="combainTwo">
+						  		<div class="form-group userIndex" >
+						  			<input type="text" class="form-control sqlInput charset" name="charset" value="utf8">
+						  			<label class="label label2">编码</label>
+						  		</div>
+						  		<div class="form-group">
+						  			<input type="text" class="form-control sqlInput prefix" name="prefix" value="fp_">
+						  			<label class="label label2">表头</label>
+						  		</div>
+						  	</div>
+						  	<div class="bottomBar">
+								<label class="errorAlert" >请检查您输入的信息</label>
+						  		<input value="下一步"  class=".btn btn-submit " id="DB" type="button" >
+						  	</div>
+						  	</form>
+					  </div>
+				  </li>
+				  <li class="page">
+					  <div class="URLPage">
+						  <form id="URLForm"  method="post"  enctype="multipart/form-data">
+							  <div class="innerPage-title">
+								  输入您的URL
+							  </div>
+							  <div class="form-group" >
+								  <input type="text" placeholder="*" class="form-control urlInput url" name="url" >
+								  <label class="label label1" >URL</label>
+							  </div>
+							  <div class="bottomBar URLbottomBar" >
+								  <label class="errorAlert" >请检查您输入的信息</label>
+								  //提交按钮
+								  <input  class=".btn btn-submit " id="UR" type="button" value="下一步" >
+
+							  </div>
+						  </form>
+
+
+					  </div>
+				  </li>
+<!-- SMTP配置 -->
+				  <li class="page">
+					  <div class="SMTPPage">
+						  <div class="Verify">
+							  <div class="form-group verify-box">
+								  <div class="Verify-title"  >邮箱验证</div>
+								  <div class="tip" style="margin-top: 20px;color: #777A7A;">验证码已经发送至您的邮箱 </div>
+								  <div class="tip" style="margin-top: 0px;color: #777A7A;">验证码5分钟内有效 </div>
+								  <input class="form-control Verifycode" onpaste="return false" onkeypress="keyPress()" oninput="if(value.length>6)value=value.slice(0,6)" />
+								  <div class="Verify-Bottombar" >
+								 	 <button  class="btn btn-submit btn-resend " name="btnresend" >重新发送</button>
+								  	<button  class="btn btn-submit " id="verify"  >验证</button>
+								  </div>
+							  </div>
+						  </div>
+						  <form id="SMTPForm"  method="post" enctype="multipart/form-data">
+							  <div class="innerPage-title">
+								  填写您的SMTP信息
+							  </div>
+							  <div class="form-group">
+								  <input type="text" class="form-control smtpInput host" placeholder="*" name="host" >
+								  <label class="label label1" >服务器</label>
+							  </div>
+							  <div class="combainTwo">
+								  <div class="form-group userIndex" >
+									  <input type="text" class="form-control smtpInput smtpusername" name="username" placeholder="*">
+									  <label class="label label2">用户名</label>
+								  </div>
+								  <div class="form-group">
+									  <input type="password" class="form-control smtpInput pwdusername" name="pwd" placeholder="*">
+									  <label class="label label2">密码</label>
+								  </div>
+							  </div>
+							  <div class="combainTwo">
+								  <div class="form-group userIndex" >
+									  <input type="text" class="form-control smtpInput sender" name="sender" placeholder="*">
+									  <label class="label label2">发件人 </label>
+								  </div>
+								  <div class="form-group">
+									  <input type="email" class="form-control smtpInput admin" name="admin" placeholder="*">
+									  <label class="label label2">管理员邮箱</label>
+								  </div>
+							  </div>
+							  <div class="combainTwo">
+								  <div class="form-group userIndex" >
+									  <input type="text" class="form-control smtpInput smtpport" name="port" value="456">
+									  <label class="label label2">端口</label>
+								  </div>
+								  <div class="form-group">
+									  <input type="text" class="form-control smtpInput secure" name="secure" value="ssl">
+									  <label class="label label2">加密</label>
+								  </div>
+							  </div>
+							  <div class="bottomBar">
+								  <label class="errorAlert" >请检查您输入的信息</label>
+								  <input  class=".btn btn-submit smtpInput host" id="SMTP" type="button" value="下一步" >
+							  </div>
+						  </form>
+					  </div>
+				  </li>
+			  </div>
+		</div>
+	</div>
+</body>
+<script src="js/install.js"></script>
+</html>

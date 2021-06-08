@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>欢迎使用JSPastebin</title>
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css"integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
+    <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.6.0/jquery.js"></script>
+    <link rel="stylesheet" href="static/css/home.css">
+</head>
+<body>
+<div class="board">
+    <div class="broadbackimg"></div>
+    <div class="barContainer">
+        <div class="title ">
+            JSPastebin
+        </div>
+        <div class="topBar">
+            <div class="underline"></div>
+            <div class="pagebtn pagebtn0" > 一键部署 </div>
+            <div class="pagebtn pagebtn1" > 全局配置 </div>
+            <div class="pagebtn pagebtn2" > 用户管理 </div>
+        </div>
+        <div class="userIndex">
+            <a href="" class="userNameRT" style="color:#454747">SunxiaoChuan</a>
+            <img src="static/img/头像.png" />
+        </div>
+    </div>
+    <div class="Container">
+        <li class="page">
+            <div class="Pastebin">
+                <div class="form-group pastebar">
+                    <div class="btn-style1 pushcode">
+                        提交
+                    </div>
+                    <div class=" chooseBar">
+                        <div class="type">
+                            <div class="choose JS">JavsScript</div>
+                            <div class="choose CSS"> CSS </div>
+                        </div>
+                        <div class= "backdiv" ></div>
+                        <div class="linkbar">
+                            <div class="link"></div>
+                            <div class="copy">复制链接</div>
+                        </div>
+                    </div>
+                    <textarea class="form-control Inputcode" id="exampleFormControlTextarea1" rows="3"></textarea>
+                </div>
+                <div class="recordbar">
+                    <div class="DIYConfig">
+                        <form id="pushConfigForm" onsubmit="return false" method="post">
+                            <div class="innerPage-title">
+                                自定义配置(不填为默认)
+                            </div>
+                            <div class="form-group">
+                                <input type="text" class="form-control" placeholder="*" id="InputEmail1" aria-describedby="emailHelp">
+                                <label class="label label1" >数据库名</label>
+                            </div>
+                            <div class="bottomBar">
+                                <label class="errorAlert" >请检查您输入的信息</label>
+                                <div class="copy">复制链接</div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </li>
+        <li class="page">2</li>
+        <li class="page">
+
+        </li>
+    </div>
+</div>
+</div>
+</body>
+<script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.6.0/jquery.js"></script>
+<script>
+    var index = 0 ;//页面索引
+    var type = 'JS';//代码类型
+    $($(".pagebtn").click(function(){
+            index = $(".pagebtn").index($(this))  ;//获取当前点击按钮索引
+            pageSwitch();
+        })
+    )
+    //切换对应页面
+    var pageSwitch = function(){
+        $(".pagebtn0").css("color","#454747");
+        $(".pagebtn2").css("color","#454747");
+        $(".pagebtn1").css("color","#454747");
+        var newPosX = 367 +index*100;
+        $(".pagebtn"+index).css("color","#00DDA3");
+        $(".underline").css("left",newPosX);
+        //页面切换
+        var pageposX = index * (-100);
+        $(":root").css("--page-posX",pageposX+"%");
+    }
+    // 切换上传类型
+    $($(".JS").click(function(){
+            $(".JS").css("color","white");
+            $(".CSS").css("color","#22CCA0");
+            $(".backdiv").css("left","10px");
+            type = 'JS';
+        })
+    )
+    $($(".CSS").click(function(){
+            $(".CSS").css("color","white");
+            $(".JS").css("color","#22CCA0");
+            $(".backdiv").css("left","105px");
+            type = 'CSS';
+        })
+    )
+    //提交代码按钮
+    $($(".pushcode").click(function(){
+            //
+        })
+    )
+</script>
+</html>
