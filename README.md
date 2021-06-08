@@ -3,5 +3,5 @@
 ## 部署页面
 ![install.gif](https://github.com/Levampire/JsPastebin/blob/main/Install.gif)
 ## 运行页面
-![install.gif](https://github.com/Levampire/JsPastebin/blob/main/Install.gif)
-![install.gif](https://github.com/Levampire/JsPastebin/blob/main/Install.gif)
+![install.gif](https://github.com/Levampire/JsPastebin/blob/main/1.png)
+![install.gif](https://github.com/Levampire/JsPastebin/blob/main/2.png)
